@@ -2,21 +2,20 @@
 // GET ACCOUNTS TOOL
 // ----------------------------
 
-import { successWithJson, errorFromCatch } from "../../utils/response.js";
-import { fetchAllAccounts } from "../../core/data/fetch-accounts.js";
-import type { Account } from "../../core/types/domain.js";
-import { getAccountBalance } from "@actual-app/api";
-import { formatAmount } from "../../utils.js";
+import { getAccountBalance } from '@actual-app/api';
+import { fetchAllAccounts } from '../../core/data/fetch-accounts.js';
+import type { Account } from '../../core/types/domain.js';
+import { formatAmount } from '../../utils.js';
+import { errorFromCatch, successWithJson } from '../../utils/response.js';
 
 export const schema = {
-  name: "get-accounts",
+  name: 'get-accounts',
   description:
-    "Retrieve a list of all accounts with their current balance and ID.",
+    'Retrieve a list of all accounts with their current balance and ID.',
   inputSchema: {
-    type: "object",
-    description: "This tool does not accept any arguments.",
+    type: 'object',
+    description: 'The input should be an empty object.',
     properties: {},
-    additionalProperties: false,
   },
 };
 
@@ -35,7 +34,7 @@ export async function handler(
     const structured = accounts.map((account) => ({
       id: account.id,
       name: account.name,
-      type: account.type || "Account",
+      type: account.type || 'Account',
       balance: formatAmount(account.balance),
       closed: account.closed,
       offBudget: account.offbudget,
